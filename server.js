@@ -17,22 +17,18 @@ app.post('/send', async (req, res) => {
   const { name, contact, request, email, message } = req.body;
 
   const msg = {
-    to: [
-  'enquiries@hpcoatings.co.uk',
-  'Garyb.1406@yahoo.co.uk',
-  'marc.mearns@outlook.com'],
-    
-    from: 'noreply@hpcoatings.co.uk', // ✅ Must be verified on SendGrid
-    subject: `New Website Enquiry: ${request}`,
-    html: `
-      <h3>New Enquiry</h3>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Contact Number:</strong> ${contact}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Request:</strong> ${request}</p>
-      <p><strong>Message:</strong><br>${message || 'N/A'}</p>
-    `,
-  };
+  to: 'enquiries@hpcoatings.co.uk', // ✅ just one for now
+  from: 'noreply@hpcoatings.co.uk',
+  subject: `New Website Enquiry: ${request}`,
+  html: `
+    <h3>New Enquiry</h3>
+    <p><strong>Name:</strong> ${name}</p>
+    <p><strong>Contact Number:</strong> ${contact}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Request:</strong> ${request}</p>
+    <p><strong>Message:</strong><br>${message || 'N/A'}</p>
+  `,
+};
 
   try {
     await sgMail.send(msg);
